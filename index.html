@@ -1,23 +1,27 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contador de habitos</title>
-    <link rel="stylesheet" href="./styles.css" />
-    <script src="./script.js" defer></script>
+    <title>Lista de Tarefas</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <main class="app-shell">
-        <h1>Contador de habitos</h1>
-        <p>Estudar JavaScript</p>
-        <strong id="valor-contador">0</strong>
-        <div>
-            <button id="btn-diminuir" type="button">-</button>
-            <button id="btn-zerar" type="button">Zerar</button>
-            <button id="btn-aumentar" type="button">+</button>
-        </div>
-        <p id="mensagem" role="status">Pronto para começar.</p>
-    </main>
+
+    <h1>Lista de Tarefas</h1>
+
+    <form id="form-tarefa">
+        <input id="entrada-tarefa" type="text" required>
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <p id="resumo">0 tarefas</p>
+
+    <button class="filtro" data-filtro="todas">Todas</button>
+    <button class="filtro" data-filtro="pendentes">Pendentes</button>
+    <button class="filtro" data-filtro="concluidas">Concluídas</button>
+
+    <ul id="lista-tarefas"></ul>
+
+    <script src="script.js"></script>
 </body>
 </html>
