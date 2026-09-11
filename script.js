@@ -1,33 +1,83 @@
-const valorContador = document.querySelector("#valor-contador");
-const mensagem = document.querySelector("#mensagem");
-const btnDiminuir = document.querySelector("#btn-diminuir");
-const btnZerar = document.querySelector("#btn-zerar");
-const btnAumentar = document.querySelector("#btn-aumentar");
+const form = document.querySelector("#form-tarefa");
+const input = document.querySelector("#entrada-tarefa");
+const lista = document.querySelector("#lista-tarefas");
+const resumo = document.querySelector("#resumo");
 
-let contador = 0;
+let filtro = "todas";
 
-function renderizarContador() {
-    valorContador.textContent = contador;
-    mensagem.textContent =
-        contador === 0
-            ? "Pronto para começar."
-            : `Você já registrou ${contador} sessão(ões).`;
-    mensagem.classList.toggle("is-active", contador > 0);
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const tarefa = document.createElement("li");
+
+    tarefa.innerHTML = `
+        <input type="checkbox">
+        ${input.value}
+        <button>Remover</button>
+    `;
+
+    lista.append(tarefa);
+
+    input.value = "";
+
+    resumo.textContent = lista.children.length + " tarefas";
+});
+
+lista.addEventListener("click", function(event) {
+
+    if (event.target.tagName == "BUTTON") {
+        event.target.parentElement.remove();
+    }
+
+    if (event.target.type == "checkbox") {
+        event.target.parentElement.classList.toggle("is-complete");
+    }
+
+    resumo.textContent = lista.children.length + " tarefas";
+
+    mostrarTarefas();
+});
+
+
+document.querySelectorAll(".filtro").forEach(function(botao) {
+
+    botao.addEventListener("click", function() {
+
+        filtro = botao.dataset.filtro;
+
+        mostrarTarefas();
+
+    });
+
+});
+
+
+function mostrarTarefas() {
+
+    const tarefas = lista.children;
+
+    for (let tarefa of tarefas) {
+
+        if (filtro == "todas") {
+            tarefa.style.display = "block";
+        }
+
+        if (filtro == "pendentes") {
+            if (tarefa.classList.contains("is-complete")) {
+                tarefa.style.display = "none";
+            } else {
+                tarefa.style.display = "block";
+            }
+        }
+
+        if (filtro == "concluidas") {
+            if (tarefa.classList.contains("is-complete")) {
+                tarefa.style.display = "block";
+            } else {
+                tarefa.style.display = "none";
+            }
+        }
+
+    }
+
 }
-
-btnAumentar.addEventListener("click", () => {
-    contador += 1;
-    renderizarContador();
-});
-
-btnDiminuir.addEventListener("click", () => {
-    contador = Math.max(0, contador - 1);
-    renderizarContador();
-});
-
-btnZerar.addEventListener("click", () => {
-    contador = 0;
-    renderizarContador();
-});
-
-renderizarContador();
