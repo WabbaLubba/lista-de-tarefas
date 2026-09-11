@@ -1,35 +1,19 @@
 body {
-    margin: 0;
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
-    font-family: Arial, sans-serif;
-    color: #eef2ff;
-    background: #0b153d;
+    font-family: Arial;
 }
 
-.app-shell {
-    width: min(520px, calc(100% - 32px));
-    padding: 40px;
-    text-align: center;
-    border-radius: 24px;
-    background: #172d6c;
-}
-
-#valor-contador {
-    display: block;
-    margin: 24px 0;
-    font-size: 6rem;
-    color: #69c5ff;
+input {
+    padding: 5px;
 }
 
 button {
-    padding: 12px 18px;
-    border: 0;
-    border-radius: 10px;
-    cursor: pointer;
+    padding: 5px;
 }
 
-.is-active {
-    color: #75e8b1;
+li {
+    margin: 10px;
+}
+
+.is-complete {
+    text-decoration: line-through;
 }
